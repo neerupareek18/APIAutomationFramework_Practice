@@ -18,7 +18,9 @@ public class ExcelReader {
     Sheet sheet;
 
     public Object[][] getCellValue(String sheetName) throws IOException {
-filename= "src/test/java/APIAutomationFramework/Resourses/TokenDataSheet.xlsx";
+
+        filename= "src/test/java/APIAutomationFramework/Resourses/TokenDataSheet.xlsx";
+
         FileInputStream fileInputStream = new FileInputStream(filename);
 
         book = WorkbookFactory.create(fileInputStream);

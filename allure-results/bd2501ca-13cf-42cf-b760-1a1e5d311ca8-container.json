@@ -1,0 +1,1 @@
+{"uuid":"bd2501ca-13cf-42cf-b760-1a1e5d311ca8","name":"APIAutomationFramework_Practice","children":[],"befores":[{"name":"setUp","status":"passed","stage":"finished","description":"Verify that the intital setup is done properly","steps":[],"attachments":[],"parameters":[],"start":1728129924342,"stop":1728129925407}],"afters":[],"start":1728129924313,"stop":1728129925416}
