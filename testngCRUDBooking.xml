@@ -4,10 +4,10 @@
     <listeners>
         <listener class-name="APIAutomationFramework.Listners.RetryListner"/>
     </listeners>
-    <test verbose="2" preserve-order="true" name="Utilities TCs">
+    <test verbose="2" preserve-order="true" name="CRUD TCs">
         <classes>
-            <class name="SampleTCs.APIAutomationFramework.TestCases.Booking.RetryListnerTC"/>
-            <class name="SampleTCs.APIAutomationFramework.TestCases.Booking.DataProviderTC"/>
+            <class name="CRUD.APIAutomationFramework.TestCases.Booking.PostBooking"/>
+            <class name="CRUD.APIAutomationFramework.TestCases.Booking.GetBookingDetails"/>
         </classes>
     </test>
 </suite>

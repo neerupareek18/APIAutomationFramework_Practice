@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test verbose="2" preserve-order="true" name="CRUD TCs">
+        <classes>
+            <class name="CRUDSamePackageITestContext.APIAutomationFramework.TestCases.Booking.CreateToken"/>
+            <class name="CRUDSamePackageITestContext.APIAutomationFramework.TestCases.Booking.PostBooking"/>
+            <class name="CRUDSamePackageITestContext.APIAutomationFramework.TestCases.Booking.GetBookingDetails"/>
+            <class name="CRUDSamePackageITestContext.APIAutomationFramework.TestCases.Booking.FullUpdateBooking"/>
+            <class name="CRUDSamePackageITestContext.APIAutomationFramework.TestCases.Booking.PartialUpdateBooking"/>
+            <class name="CRUDSamePackageITestContext.APIAutomationFramework.TestCases.Booking.DeleteBooking"/>
+            <class name="CRUDSamePackageITestContext.APIAutomationFramework.TestCases.Booking.GetBookingAfterDelete"/>
+
+        </classes>
+    </test>
+</suite>
