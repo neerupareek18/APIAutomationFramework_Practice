@@ -1,9 +1,6 @@
 package APIAutomationFramework.Modules;
 
-import APIAutomationFramework.Pojos.ReqResAPI.CreateRequest;
-import APIAutomationFramework.Pojos.ReqResAPI.CreateResponse;
-import APIAutomationFramework.Pojos.ReqResAPI.ListUsersResponse;
-import APIAutomationFramework.Pojos.ReqResAPI.SingleUserResponse;
+import APIAutomationFramework.Pojos.ReqResAPI.*;
 import com.github.javafaker.Faker;
 import com.google.gson.Gson;
 
@@ -42,5 +39,22 @@ public class PayloadManager_ReqRes {
     CreateResponse createResponsePayload = gson.fromJson(response, CreateResponse.class);
     return createResponsePayload;
 }
+
+//public String SuccRegisterRequestPayload(){
+//
+//}
+//
+//public RegisterResponse RegisterResponsePayload(){
+//
+//}
+//
+//    public String UnsuccRegisterRequestPayload(){
+//
+//    }
+//
+//    public RegisterResponse UnsuccRegisterResponsePayload(){
+//
+//    }
+
 
 }

@@ -4,11 +4,10 @@ import APIAutomationFramework.BaseClass.BaseClassReqResAPI;
 import APIAutomationFramework.Endpoints.ReqResAPI.ReqResAPIConstantsClass;
 import APIAutomationFramework.Listners.RetryAnalyzer;
 import APIAutomationFramework.Modules.PayloadManager_ReqRes;
-import APIAutomationFramework.Pojos.ReqResAPI.DataResponse;
-import APIAutomationFramework.Pojos.ReqResAPI.ListUsersResponse;
-import APIAutomationFramework.Pojos.ReqResAPI.SingleUserResponse;
-import APIAutomationFramework.Pojos.ReqResAPI.SupportResponse;
+import APIAutomationFramework.Pojos.ReqResAPI.*;
+import com.github.javafaker.Faker;
 import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
 import io.restassured.specification.RequestSpecification;
@@ -59,10 +58,12 @@ context.setAttribute("id",id);
     public void getSingleUserDetails(ITestContext context){
 int id = (int) context.getAttribute("id");
 
-requestSpecification.baseUri(ReqResAPIConstantsClass.listUsersOnPage+"/"+id);
+requestSpecification.basePath(ReqResAPIConstantsClass.listUsersOnPage+"/"+id);
 response = RestAssured.given(requestSpecification).when().get();
 
-        validatableResponse = response.then().statusLine("200 OK");
+
+        validatableResponse = response.then().statusLine("HTTP/1.1 200 OK");
+        assertThat(response.statusLine()).contains("200 OK");
 
         SingleUserResponse singleUserResponse = gson.fromJson(response.asString(), SingleUserResponse.class);
         System.out.println(singleUserResponse.getData().getId());
@@ -72,6 +73,46 @@ response = RestAssured.given(requestSpecification).when().get();
         System.out.println(singleUserResponse.getData().getAvatar());
         System.out.println(singleUserResponse.getSupport().getUrl());
         System.out.println(singleUserResponse.getSupport().getText());
+    }
+
+    @Test(priority = 3)
+    public void getDetailsIdNotExists(ITestContext context) {
+        Faker faker = new Faker();
+        int id = faker.random().nextInt(90);
+
+        requestSpecification.basePath(ReqResAPIConstantsClass.listUsersOnPage + "/" + id);
+        response = RestAssured.given(requestSpecification).when().get();
+        System.out.println(response.asString());
+        validatableResponse = response.then().statusCode(404);
+        assertThat(response).isInstanceOf(Object.class);
+    }
+
+    @Test (priority = 4)
+    public void createUser(ITestContext context1){
+        payloadManager_reqRes = new PayloadManager_ReqRes();
+        String name = PayloadManager_ReqRes.name;
+
+        String payload = payloadManager_reqRes.createUserPayload();
+
+        requestSpecification.basePath(ReqResAPIConstantsClass.createUser)
+                .contentType(ContentType.JSON)
+                .body(payload);
+
+        response = RestAssured.given(requestSpecification).when().post();
+
+        response.then().log().all();
+        CreateResponse createResponsePayload = gson.fromJson(response.asString(), CreateResponse.class);
+
+        context1.setAttribute("creationId", createResponsePayload.getId());
+        assertThat(createResponsePayload.getName()).isEqualTo(name);
+    }
+
+    @Test(priority = 5)
+    public void getUserDetails(ITestContext context1){
+        String id = (String) context1.getAttribute("creationId");
+        requestSpecification.basePath(ReqResAPIConstantsClass.createUser+"/"+id);
+        response = RestAssured.given(requestSpecification).when().get();
+        response.then().log().all();
     }
 
 }

@@ -5,10 +5,7 @@ import org.apache.poi.ss.formula.udf.UDFFinder;
 import org.apache.poi.ss.usermodel.*;
 import org.testng.annotations.DataProvider;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
 import java.util.Iterator;
 import java.util.List;
 
@@ -20,8 +17,9 @@ public class ExcelReader {
     public Object[][] getCellValue(String sheetName) throws IOException {
 
         filename= "src/test/java/APIAutomationFramework/Resourses/TokenDataSheet.xlsx";
-
-        FileInputStream fileInputStream = new FileInputStream(filename);
+File file = new File(filename);
+        FileInputStream fileInputStream = null;
+        fileInputStream = new FileInputStream(file);
 
         book = WorkbookFactory.create(fileInputStream);
         sheet = book.getSheet(sheetName);

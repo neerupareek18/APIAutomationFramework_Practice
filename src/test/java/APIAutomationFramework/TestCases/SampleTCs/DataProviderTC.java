@@ -7,10 +7,10 @@ public class DataProviderTC {
 
     @Test(dataProvider = "getData", dataProviderClass = ExcelReader.class)
     public void tc1(String name, String job){
+//
+//        String name1 = name;
+//        String job1 = job;
 
-        String name1 = name;
-        String job1 = job;
-
-        System.out.println(name1+"-->"+job1);
+        System.out.println(name+"-->"+job);
     }
 }
